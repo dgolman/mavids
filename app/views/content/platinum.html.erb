@@ -1,2 +1,5 @@
 <h1>Content#platinum</h1>
 <p>Find me in app/views/content/platinum.html.erb</p>
+<% @videos.each do |video| %>
+	<%= video_tag video.video.url(:mp4), controls: true, type: "video/mp4", size: "400x400" %>
+<% end %>

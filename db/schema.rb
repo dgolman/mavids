@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150408023212) do
+ActiveRecord::Schema.define(version: 20150527191546) do
 
   create_table "payola_affiliates", force: :cascade do |t|
     t.string   "code"
@@ -30,10 +30,10 @@ ActiveRecord::Schema.define(version: 20150408023212) do
   end
 
   create_table "payola_sales", force: :cascade do |t|
-    t.string   "email"
-    t.string   "guid"
+    t.string   "email",                limit: 191
+    t.string   "guid",                 limit: 191
     t.integer  "product_id"
-    t.string   "product_type"
+    t.string   "product_type",         limit: 100
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "state"
@@ -51,11 +51,11 @@ ActiveRecord::Schema.define(version: 20150408023212) do
     t.integer  "affiliate_id"
     t.text     "customer_address"
     t.text     "business_address"
-    t.string   "stripe_customer_id"
+    t.string   "stripe_customer_id",   limit: 191
     t.string   "currency"
     t.text     "signed_custom_fields"
     t.integer  "owner_id"
-    t.string   "owner_type"
+    t.string   "owner_type",           limit: 100
   end
 
   add_index "payola_sales", ["coupon_id"], name: "index_payola_sales_on_coupon_id"
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 20150408023212) do
     t.datetime "updated_at"
     t.string   "currency"
     t.integer  "amount"
-    t.string   "guid"
+    t.string   "guid",                 limit: 191
     t.string   "stripe_status"
     t.integer  "affiliate_id"
     t.string   "coupon"
@@ -140,5 +140,14 @@ ActiveRecord::Schema.define(version: 20150408023212) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["plan_id"], name: "index_users_on_plan_id"
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "videos", force: :cascade do |t|
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "video_file_name"
+    t.string   "video_content_type"
+    t.integer  "video_file_size"
+    t.datetime "video_updated_at"
+  end
 
 end

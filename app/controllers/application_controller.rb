@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     case current_user.role
       when 'admin'
-        users_path
+        videos_path
       when 'silver'
         content_silver_path
       when 'gold'
